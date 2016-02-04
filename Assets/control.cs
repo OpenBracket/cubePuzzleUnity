@@ -25,8 +25,10 @@ public class control : MonoBehaviour {
 		}
 
 		if (Input.GetKeyDown (KeyCode.Space)) {
-			cube.AddForce (new Vector2(0,jump), ForceMode2D.Impulse);
+			if(cube.velocity.y == 0)
+				cube.AddForce (new Vector2(0,jump), ForceMode2D.Impulse);
 		}
 	
+
 	}
 }
