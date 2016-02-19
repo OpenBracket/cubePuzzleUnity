@@ -7,6 +7,7 @@ public class control2 : MonoBehaviour {
     public float jump = 0f;
     private float movex = 0f;
     private float movey = 0f;
+    private float yVel = 0f;
 
     Rigidbody2D player;
 
@@ -19,15 +20,20 @@ public class control2 : MonoBehaviour {
     // Update is called once per frame
     void FixedUpdate()
     {
-        movex = Input.GetAxis("Horizontal");
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        movex = Input.GetAxis("Horizontal");
+        //movey = Input.GetAxis("Vertical");
+
+        if(Input.GetKeyDown(KeyCode.Space))
         {
-            if (player.velocity.y == 0)
-                player.AddForce(new Vector2(0, jump), ForceMode2D.Impulse);
+            print("Space Pressed");
+            if(player.velocity.y == 0) yVel = jump;
         }
 
-        //movey = Input.GetAxis("Vertical");
-        player.velocity = new Vector2(movex * Speed, player.velocity.y);
+
+        player.velocity = new Vector2(movex * Speed, yVel);
+        yVel = 0f;
+
+        
     }
 }
