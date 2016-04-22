@@ -7,6 +7,7 @@ public class blockMovement : MonoBehaviour {
     public Rigidbody2D player;
     public bool isConnected, shouldConnect;
     public int connectedSide;
+    public BoxCollider2D col;
 
     int NONE = 0, TOP = 1, BOTTOM = 2, LEFT = 3, RIGHT = 4;
 
@@ -16,36 +17,21 @@ public class blockMovement : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void FixedUpdate () {
+	void Update () {
 
-        if (isConnected)
+        if (connectedSide == TOP)
         {
-            enableMovement();
-           
-
+            this.transform.position = playerTop.transform.position;
+        } else if (connectedSide == BOTTOM)
+        {
+            this.transform.position = playerBottom.transform.position;
+        } else if (connectedSide == LEFT)
+        {
+            this.transform.position = playerLeft.transform.position;
+        } else if (connectedSide == RIGHT)
+        {
+            this.transform.position = playerRight.transform.position;
         }
 
-        if (!isConnected && shouldConnect)
-        {
-            setSide(TOP);
-            isConnected = true;
-        }
-
-       
-
-    }
-
-    void enableMovement()
-    {
-        this.GetComponent<HorizontalMovement>().enabled = true;
-        this.GetComponent<VerticalMovement>().enabled = true;
-    }
-
-    void setSide(int side)
-    {
-        if(side == TOP)
-        {
-            this.GetComponent<Rigidbody2D>().position = playerTop.transform.position;
-        }
     }
 }
